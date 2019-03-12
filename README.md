@@ -16,7 +16,7 @@ This example shows a custom component for a `User` record that renders certain f
 
 ### How custom components works
 
-Custom components are standard [`iframe`](https://en.wikipedia.org/wiki/HTML_element#Frames) HTML elements which render your data in a custom way. Prisma Admin provides the data for a specific database record to your custom component trough a query string: `${url}?data=${JSON.stringify(data)}`. It's possible to have multiple view for single query. Here is basic [example](https://github.com/Huvik/Custom-view) for json custom view.
+Custom components are standard [`iframe`](https://en.wikipedia.org/wiki/HTML_element#Frames) HTML elements which render your data in a custom way. Prisma Admin provides the data for a specific database record to your custom component trough a query string: `${url}?data=${JSON.stringify(data)}`. It's possible to have multiple view for single query. 
 
 ### How to add a custom component in Prisma Admin 
 
@@ -25,3 +25,23 @@ Custom components are standard [`iframe`](https://en.wikipedia.org/wiki/HTML_ele
 1. Add custom component info:
     - Name: A name for the custom component (e.g. `MyUserView`)
     - URL:  The HTTP endpoint where the `iframe` element is being served. Note that Prisma Admin will append the corresponding database record as JSON to the URL as the query string.
+
+### Example
+
+You can find a basic example of a custom component that simply renders the database record as JSON [here](https://github.com/Huvik/Custom-view):
+
+```js
+const qs = require('qs')
+const url = require('url')
+
+module.exports = (req, res) => {
+  const parsed = qs.parse(url.parse(req.url).search, {
+    ignoreQueryPrefix: true
+  })
+  if (parsed.data) {
+    res.end(JSON.stringify(JSON.parse(parsed.data), null, 2))
+  } else {
+    res.end('Please provide data in query string!')
+  }
+}
+```
