@@ -1,5 +1,5 @@
 # Feedback for Prisma Admin
 
-This repository is the central place to collect feedback and issues related to [Prisma Admin](https://www.prisma.io/admin).
+⚠️ **This repo is not active any more** ⚠️
 
-Please [**open an issue**](https://github.com/prisma/prisma-admin-feedback/issues/new) if you want to leave feedback.
+If you have any feedback for Prisma Admin, please open an issue in the [`prisma1`](https://github.com/prisma/prisma1/) repo.
